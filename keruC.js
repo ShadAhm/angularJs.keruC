@@ -169,7 +169,7 @@ var f = function ($compile) {
     }
 };
 
-angular.module('keruc', []).directive('keruc', ['$compile', f]);
+angular.module('keruC', []).directive('kerucSeatpicker', ['$compile', f]);
 
 
 

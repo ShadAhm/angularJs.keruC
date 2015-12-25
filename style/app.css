@@ -1,0 +1,42 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+div.container {
+    display:flex; 
+}
+
+h1 {
+    font-size:larger; 
+}
+
+div.item {
+    background: whitesmoke;
+}
+
+#consolething {
+    color:grey;
+    background-color: rgb(30,30,30); 
+    font-family:Consolas; 
+    font-size:small; 
+}
+
+    #consolething .movingpart {
+    padding:8px;
+}
+
+#consolething .staticpart {
+    border-top:2px solid #7854AF; 
+    padding:8px;
+}
+
+.img-container {
+    width: 200px;
+    height: 120px;
+}
+
+/* resize images */
+.img-container img {
+    width: 100%;
+    height: auto;
+}

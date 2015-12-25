@@ -3,7 +3,7 @@
 var f = function ($compile) {
     return {
         restrict: 'E',
-        template: '<canvas width="600" height="600" id="canvasId"></canvas>',
+        template: '<canvas width="500" height="500" id="canvasId"></canvas>',
         scope: {
             rows: '=data'
         },
@@ -13,8 +13,8 @@ var f = function ($compile) {
             var rows = null;
 
             scope.settings = {
-                canvasWidth: attrs.canvasWidth || 600,
-                canvasHeight: attrs.canvasHeight || 600,
+                canvasWidth: attrs.canvasWidth || 500,
+                canvasHeight: attrs.canvasHeight || 500,
                 freeSeatColour: attrs.freeSeatColour || '#76D75D',
                 freeSeatTextColour: attrs.freeSeatTextColour || '#C1F2B4',
                 takenSeatColour: attrs.takenSeatColour || '#F56979',
@@ -108,7 +108,7 @@ var f = function ($compile) {
                             ctx.fillStyle = textColour;
                             ctx.textBaseline = 'middle';
                             ctx.textAlign = 'center';
-                            ctx.font = "20pt sans-serif";
+                            ctx.font = "10pt sans-serif";
                             ctx.fillText(rows[i].nodes[j].displayName, lastRight + structure.eachCabangX + (structure.eachSquare.width / 2), lastUp + structure.eachCabangY + (structure.eachSquare.height / 2));
 
                             lastRight = lastRight + structure.eachCabangX + structure.eachSquare.width;
@@ -130,7 +130,7 @@ var f = function ($compile) {
                 ctx.fillStyle = node.node.selected == 0 ? scope.settings.freeSeatTextColour : scope.settings.selectedSeatTextColor;
                 ctx.textBaseline = 'middle';
                 ctx.textAlign = 'center';
-                ctx.font = "20pt sans-serif";
+                ctx.font = "10pt sans-serif";
                 ctx.fillText(node.node.displayName, node.x + (structure.eachSquare.width / 2), node.y + (structure.eachSquare.height / 2));
             };
 

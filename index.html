@@ -1,21 +1,41 @@
 <!DOCTYPE html>
 
 <html data-ng-app="keruCDemo">
-<head lang="ko">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
 
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular.min.js"></script>
-	<script src="keruC.js"></script>
+<head lang="ko">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://reset5.googlecode.com/hg/reset.min.css" rel="stylesheet" type="text/css">
+    <link href="style/app.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular.min.js"></script>
+    <script src="keruC.js"></script>
     <script src="scripts/app.js"></script>
 
-	<title>keruC by Arshad Ahmad</title>
+    <title>keruC by Arshad Ahmad</title>
 </head>
 
 <body data-ng-controller="mainController">
-            <keruc-seatpicker data="seatsData">
-            </keruc-seatpicker>
+    <div class="container">
+    <div class="item">
+                        <h1>keruC</h1>
+
+                    <span>v0.1</span>
+                    <a href="http://www.google.com">
+                    <i class="fa fa-github"></i>
+                     Fork on Github
+                    </a>
+    </div>
+    </div>
+    <div class="container">
+        <div class="item">
+            <keruc-seatpicker data="seatsData"></keruc-seatpicker>
+        </div>
+        <div class="item">
+            <span>Console</span>
+        </div>
+    </div>
 </body>
+
 </html>

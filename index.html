@@ -18,22 +18,28 @@
 
 <body data-ng-controller="mainController">
     <div class="container">
-    <div class="item">
-                        <h1>keruC</h1>
+        <div class="item">
+            <h1>keruC</h1>
 
-                    <span>v0.1</span>
-                    <a href="http://www.google.com">
-                    <i class="fa fa-github"></i>
-                     Fork on Github
-                    </a>
-    </div>
+            <span>v0.1</span>
+            <a href="http://www.google.com">
+                <i class="fa fa-github"></i> Fork on Github
+            </a>
+        </div>
     </div>
     <div class="container">
         <div class="item">
-            <keruc-seatpicker data="seatsData"></keruc-seatpicker>
+            <keruc-seatpicker data-data="seatsData" data-selectedfucks="selloutfuckhead" data-on-selected="fuckheadSelected($node)" data-on-deselected="fuckheadDeselected($node)" data-on-disallowed-selected="fuckheadDisallowedSelected($node)"></keruc-seatpicker>
         </div>
         <div class="item">
-            <span>Console</span>
+            <span><strong>Selected seats : </strong></span>
+            <div ng-repeat="fuckhead in selloutfuckhead track by fuckhead.uniqueName">
+                <div class="selectedbox">{{ fuckhead.uniqueName }}</div>
+            </div>
+            <div ng-bind="userEvent">
+                
+                </div>
+
         </div>
     </div>
 </body>

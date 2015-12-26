@@ -10,17 +10,26 @@ angular.module('keruCDemo')
 
         $scope.selloutfuckhead = [];
         
-        $scope.userEvent = '';
+        $scope.userEvent = '--';
         
         $scope.fuckheadSelected = function(node) {
-            $scope.userEvent = 'User selected ' + node.displayName; 
+            $scope.userEvent = 'user selected ' + node.displayName;
+            $scope.$apply(); 
+            
+            console.log('User selected ' + node.displayName); 
         };
         
         $scope.fuckheadDeselected = function(node) {
-            $scope.userEvent = 'User deselected ' + node.displayName;
+            $scope.userEvent = 'user deselected ' + node.displayName;
+            $scope.$apply(); 
+            
+            console.log($scope.userEvent = 'User deselected ' + node.displayName);
         };
         
         $scope.fuckheadDisallowedSelected = function(node) {
-            $scope.userEvent = 'User attempted to select occupied seat : ' + node.displayName;
+            $scope.userEvent = 'user attempting to select disallowed node ' + node.displayName;
+            $scope.$apply(); 
+            
+            console.log('User attempted to select occupied seat : ' + node.displayName);
         };
     }]);

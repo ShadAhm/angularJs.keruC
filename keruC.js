@@ -68,9 +68,12 @@ var f = function ($compile) {
             var drawSquare = function (selected, xPos, yPos, width, height, displayName) {
                 var canvas = element.find('canvas')[0];
                 var ctx = canvas.getContext('2d');
-                var fontSize = (structure.eachSquare.width * 0.4) + "px";
+                var fontSize = structure.eachSquare.width * 0.4;
                 var seatColour = '#000000';
                 var textColour = '#000000';
+                
+                var boxCentrePointX = xPos + (structure.eachSquare.width / 2);
+                var boxCentrePointY = yPos + (structure.eachSquare.height / 2);
 
                 switch (selected) {
                     case 0:
@@ -84,7 +87,29 @@ var f = function ($compile) {
                     case 2:
                         seatColour = scope.settings.selectedSeatColour;
                         textColour = scope.settings.selectedSeatTextColour;
-                        break;
+
+                        ctx.fillStyle = seatColour;
+                        ctx.fillRect(xPos, yPos, width, height);
+
+                        ctx.fillStyle = '#472085';
+                        ctx.beginPath();
+                        ctx.arc(boxCentrePointX, boxCentrePointY, structure.eachSquare.width * 0.2, 0, 2 * Math.PI);
+                        ctx.closePath();
+                        ctx.fill();
+
+                        ctx.beginPath();
+                        ctx.fillStyle = '#472085';
+                        ctx.beginPath();
+                        ctx.arc(boxCentrePointX, yPos + structure.eachSquare.height, structure.eachSquare.width * 0.35, 0, Math.PI, true);
+                        ctx.closePath();
+                        ctx.fill();
+
+                        ctx.fillStyle = textColour;
+                        ctx.textBaseline = 'hanging';
+                        ctx.textAlign = 'right';
+                        ctx.font = fontSize + 'px sans-serif';
+                        ctx.fillText(displayName, (xPos + structure.eachSquare.width), yPos);
+                        return;
                 }
 
                 ctx.fillStyle = seatColour;
@@ -92,8 +117,8 @@ var f = function ($compile) {
                 ctx.fillStyle = textColour;
                 ctx.textBaseline = 'middle';
                 ctx.textAlign = 'center';
-                ctx.font = fontSize + ' sans-serif';
-                ctx.fillText(displayName, xPos + (structure.eachSquare.width / 2), yPos + (structure.eachSquare.height / 2));
+                ctx.font = fontSize + 'px sans-serif';
+                ctx.fillText(displayName, boxCentrePointX, boxCentrePointY);
             };
 
             var draw = function () {
@@ -167,14 +192,14 @@ var f = function ($compile) {
                 }
 
                 if (clickedNode == null || clickedNode.node.selected == 1) {
-                    scope.onDisallowedSelected({ $node : clickedNode.node });
+                    scope.onDisallowedSelected({ $node: clickedNode.node });
                     return;
                 }
                 else {
                     switch (clickedNode.node.selected) {
-                        case 0: scope.onDeselected({ $node : clickedNode.node }); 
+                        case 0: scope.onDeselected({ $node: clickedNode.node });
                             break;
-                        case 2: scope.onSelected({ $node : clickedNode.node });
+                        case 2: scope.onSelected({ $node: clickedNode.node });
                             break;
                     }
 

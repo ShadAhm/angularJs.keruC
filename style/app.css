@@ -1,44 +1,52 @@
+.flex-container, html, body {
+    height:100%;
+    margin:0;
+}
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-div.container {
-    display:flex; 
+
+div.flex-container {
+    display:flex;
+    flex-direction:row;
+}
+div.sidebar-container {
+    margin:1em;
+    padding:1em;
+    background-color: rgb(251,251,251);
 }
 
-h1 {
-    font-size:larger; 
+.intro-text {
+    margin-top:1em;
 }
 
-div.item {
-    background: whitesmoke;
+div.flex-container > div.flex-columns {
+    display:flex;
+    background-color: rgb(245,245,245);     
 }
 
-#consolething {
-    color:grey;
-    background-color: rgb(30,30,30); 
-    font-family:Consolas; 
+.list-heading {
+    text-transform: uppercase;
+    font-weight: bold;
     font-size:small; 
 }
 
-    #consolething .movingpart {
-    padding:8px;
+.listheading > smawl {
+    font-size:smaller;
+    font-style: italic; 
 }
 
-#consolething .staticpart {
-    border-top:2px solid #7854AF; 
-    padding:8px;
+div.flex-column-left {
+    max-width:288px;
+    flex-grow:unset;
 }
 
-.img-container {
-    width: 200px;
-    height: 120px;
-}
-
-/* resize images */
-.img-container img {
-    width: 100%;
-    height: auto;
+div.flex-column-right {
+    flex-grow:1;
+    flex-direction: column;
+    align-items:center; 
+    justify-content: center;
 }
 
 div.selectedbox {

@@ -6,40 +6,85 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
 
+
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://reset5.googlecode.com/hg/reset.min.css" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="style/app.css" rel="stylesheet" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular.min.js"></script>
     <script src="keruC.js"></script>
     <script src="scripts/app.js"></script>
 
-    <title>keruC by Arshad Ahmad</title>
+    <title>keruC demo</title>
 </head>
 
 <body data-ng-controller="mainController">
-    <div class="container">
-        <div class="item">
-            <h1>keruC</h1>
+    <div class="flex-container">
+        <div class="flex-columns flex-column-left">
+            <div class="sidebar-container">
+                <h1>keruC <small>v0.1 alpha</small></h1>
+                <small>by 
+                    <a href="https://github.com/shadahm">Arshad Ahmad</a>
+                </small>
 
-            <span>v0.1</span>
-            <a href="http://www.google.com">
-                <i class="fa fa-github"></i> Fork on Github
-            </a>
-        </div>
-    </div>
-    <div class="container">
-        <div class="item">
-            <keruc-seatpicker data-data="seatsData" data-selectedfucks="selloutfuckhead" data-on-selected="fuckheadSelected($node)" data-on-deselected="fuckheadDeselected($node)" data-on-disallowed-selected="fuckheadDisallowedSelected($node)"></keruc-seatpicker>
-        </div>
-        <div class="item">
-            <span><strong>Selected seats : </strong></span>
-            <div ng-repeat="fuckhead in selloutfuckhead track by fuckhead.uniqueName">
-                <div class="selectedbox">{{ fuckhead.uniqueName }}</div>
-            </div>
-            <div ng-bind="userEvent">
-                
+                <div class="intro-text">
+                    <p>The C stands for Canvas; keruC is a seatmap/seat-picker implementated with AngularJs and HTML5 Canvas.</p>
                 </div>
 
+                <h3 class="list-heading">Dependencies</h3>
+                <ul class="list-unstyled">
+                    <li><a href="https://angularjs.org/">AngularJs 1.x</a></li>
+                </ul>
+
+                <h3 class="list-heading">Browser support</h3>
+                <table>
+                    <tr>
+                        <td><i class="fa fa-internet-explorer fa-lg"></i></td>
+                        <td>9+</td>
+                        <td><i class="fa fa-edge fa-lg"></i>
+                            <td>12+</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-firefox fa-lg"></i></td>
+                        <td>9+</td>
+                        <td><i class="fa fa-chrome fa-lg">
+                        <td>43+</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-safari fa-lg"></i></td>
+                        <td>8+</td>
+                        <td><i class="fa fa-opera fa-lg"></i></td>
+                        <td>33+</td>
+                    </tr>
+                </table>
+
+                <hr/>
+
+                <form action="https://github.com/ShadAhm/keruC">
+                    <button class="btn btn-link">
+                        <i class="fa fa-github"></i> Fork on Github
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="flex-columns flex-column-right">
+            <div>
+                <keruc-seatpicker data-data="seatsData" data-selectedfucks="selloutfuckhead" data-on-selected="fuckheadSelected($node)" data-on-deselected="fuckheadDeselected($node)"
+                data-on-disallowed-selected="fuckheadDisallowedSelected($node)"></keruc-seatpicker>
+                <div>
+                    <h6 class="list-heading">Event listeners:</h6>
+                    <div ng-bind="userEvent">
+                    </div>
+                    <h6 class="list-heading">Selected seats: <smawl>(accessible in parent controller scope)<smawl></h6>
+                    <div>
+                        <span ng-show="selloutfuckhead.length > 0" ng-repeat="fuckhead in selloutfuckhead track by fuckhead.uniqueName">
+                    {{ fuckhead.displayName }}
+                </span>
+                        <span ng-show="selloutfuckhead.length <= 0">
+                    none
+                    </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

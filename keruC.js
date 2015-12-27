@@ -103,12 +103,6 @@ var f = function ($compile) {
                         ctx.arc(boxCentrePointX, yPos + structure.eachSquare.height, structure.eachSquare.width * 0.35, 0, Math.PI, true);
                         ctx.closePath();
                         ctx.fill();
-
-                        ctx.fillStyle = textColour;
-                        ctx.textBaseline = 'hanging';
-                        ctx.textAlign = 'right';
-                        ctx.font = fontSize + 'px sans-serif';
-                        ctx.fillText(displayName, (xPos + structure.eachSquare.width), yPos);
                         return;
                 }
 

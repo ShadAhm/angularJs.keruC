@@ -3,36 +3,39 @@
 var f = function ($compile) {
     return {
         restrict: 'E',
-        template: '<canvas width="600" height="600" id="canvasId"></canvas>',
+        template: '<canvas width="{{settings.canvasWidth}}" height="{{settings.canvasHeight}}" id="canvasId"></canvas>',
         scope: {
-            rows: '=data'
+            rows: '=data',
+            selectedfucks: '=',
+            onSelected: '&',
+            onDeselected: '&',
+            onDisallowedSelected: '&'
         },
         link: function (scope, element, attrs) {
-            var canvas = element.find('canvas')[0];
             var nodeLocations = [];
             var rows = null;
 
             scope.settings = {
-                canvasWidth: attrs.canvasWidth || 600,
-                canvasHeight: attrs.canvasHeight || 600,
+                canvasWidth: attrs.canvasWidth || 500,
+                canvasHeight: attrs.canvasHeight || 500,
                 freeSeatColour: attrs.freeSeatColour || '#76D75D',
                 freeSeatTextColour: attrs.freeSeatTextColour || '#C1F2B4',
                 takenSeatColour: attrs.takenSeatColour || '#F56979',
                 takenSeatTextColour: attrs.takenSeatTextColour || '#BB1F31',
-                selectedSeatColor: attrs.selectedSeatColor || '#7854AF',
-                selectedSeatTextColor: attrs.selectedSeatTextColor || '#472085'
+                selectedSeatColour: attrs.selectedSeatColour || '#7854AF',
+                selectedSeatTextColour: attrs.selectedSeatTextColour || '#472085'
             };
 
-            var structure = 
+            var structure =
                 {
                     eachCabangX: 0,
                     eachCabangY: 0,
-                    eachSquare : { width : 0, height : 0 }
+                    eachSquare: { width: 0, height: 0 }
                 }
 
             var onRowDataChanged = function (newData) {
                 if (newData == null)
-                    return; 
+                    return;
 
                 rows = newData.rows;
                 var canvasWidth = scope.settings.canvasWidth;
@@ -57,15 +60,64 @@ var f = function ($compile) {
                 structure.eachSquare.height = (canvasHeight - totalCabangSpaceY) / rows.length;
 
                 draw();
+                addClickEventToCanvas();
             };
 
             scope.$watch('rows', onRowDataChanged);
 
+            var drawSquare = function (selected, xPos, yPos, width, height, displayName) {
+                var canvas = element.find('canvas')[0];
+                var ctx = canvas.getContext('2d');
+                var fontSize = structure.eachSquare.width * 0.4;
+                var seatColour = '#000000';
+                var textColour = '#000000';
+                
+                var boxCentrePointX = xPos + (structure.eachSquare.width / 2);
+                var boxCentrePointY = yPos + (structure.eachSquare.height / 2);
+
+                switch (selected) {
+                    case 0:
+                        seatColour = scope.settings.freeSeatColour;
+                        textColour = scope.settings.freeSeatTextColour;
+                        break;
+                    case 1:
+                        seatColour = scope.settings.takenSeatColour;
+                        textColour = scope.settings.takenSeatTextColour;
+                        break;
+                    case 2:
+                        seatColour = scope.settings.selectedSeatColour;
+                        textColour = scope.settings.selectedSeatTextColour;
+
+                        ctx.fillStyle = seatColour;
+                        ctx.fillRect(xPos, yPos, width, height);
+
+                        ctx.fillStyle = '#472085';
+                        ctx.beginPath();
+                        ctx.arc(boxCentrePointX, boxCentrePointY, structure.eachSquare.width * 0.2, 0, 2 * Math.PI);
+                        ctx.closePath();
+                        ctx.fill();
+
+                        ctx.beginPath();
+                        ctx.fillStyle = '#472085';
+                        ctx.beginPath();
+                        ctx.arc(boxCentrePointX, yPos + structure.eachSquare.height, structure.eachSquare.width * 0.35, 0, Math.PI, true);
+                        ctx.closePath();
+                        ctx.fill();
+                        return;
+                }
+
+                ctx.fillStyle = seatColour;
+                ctx.fillRect(xPos, yPos, width, height);
+                ctx.fillStyle = textColour;
+                ctx.textBaseline = 'middle';
+                ctx.textAlign = 'center';
+                ctx.font = fontSize + 'px sans-serif';
+                ctx.fillText(displayName, boxCentrePointX, boxCentrePointY);
+            };
+
             var draw = function () {
                 if (rows == null)
                     return;
-
-                var ctx = canvas.getContext('2d');
 
                 var lastUp = 0;
                 for (var i = 0; i < rows.length; ++i) {
@@ -76,26 +128,14 @@ var f = function ($compile) {
                             lastRight = lastRight + structure.eachCabangX + structure.eachSquare.width;
                         }
                         else {
-                            var seatColour = '#000000';
-                            var textColour = '#000000';
-
-                            switch (rows[i].nodes[j].selected) {
-                                case 0:
-                                    seatColour = scope.settings.freeSeatColour;
-                                    textColour = scope.settings.freeSeatTextColour;
-                                    break;
-                                case 1:
-                                    seatColour = scope.settings.takenSeatColour;
-                                    textColour = scope.settings.takenSeatTextColour;
-                                    break;
-                                case 2:
-                                    seatColour = scope.settings.selectedSeatColour;
-                                    textColour = scope.settings.selectedSeatTextColor;
-                                    break;
-                            }
-
-                            ctx.fillStyle = seatColour;
-                            ctx.fillRect(lastRight + structure.eachCabangX, lastUp + structure.eachCabangY, structure.eachSquare.width, structure.eachSquare.height);
+                            drawSquare(
+                                rows[i].nodes[j].selected,
+                                lastRight + structure.eachCabangX,
+                                lastUp + structure.eachCabangY,
+                                structure.eachSquare.width,
+                                structure.eachSquare.height,
+                                rows[i].nodes[j].displayName
+                                );
 
                             nodeLocations.push({
                                 node: rows[i].nodes[j],
@@ -105,36 +145,16 @@ var f = function ($compile) {
                                 height: structure.eachSquare.height
                             });
 
-                            ctx.fillStyle = textColour;
-                            ctx.textBaseline = 'middle';
-                            ctx.textAlign = 'center';
-                            ctx.font = "20pt sans-serif";
-                            ctx.fillText(rows[i].nodes[j].displayName, lastRight + structure.eachCabangX + (structure.eachSquare.width / 2), lastUp + structure.eachCabangY + (structure.eachSquare.height / 2));
-
                             lastRight = lastRight + structure.eachCabangX + structure.eachSquare.width;
                         }
                     }
 
                     lastUp = lastUp + structure.eachCabangY + structure.eachSquare.height;
                 }
-
-                addClickEventToCanvas(); 
-            };
-
-            var reDraw = function (node) {
-                var ctx = canvas.getContext('2d');
-
-                ctx.fillStyle = node.node.selected == 0 ? scope.settings.freeSeatColour : scope.settings.selectedSeatColor;
-                ctx.fillRect(node.x, node.y, node.width, node.height);
-
-                ctx.fillStyle = node.node.selected == 0 ? scope.settings.freeSeatTextColour : scope.settings.selectedSeatTextColor;
-                ctx.textBaseline = 'middle';
-                ctx.textAlign = 'center';
-                ctx.font = "20pt sans-serif";
-                ctx.fillText(node.node.displayName, node.x + (structure.eachSquare.width / 2), node.y + (structure.eachSquare.height / 2));
             };
 
             var onCanvasClick = function (e) {
+                var canvas = element.find('canvas')[0];
                 var x = e.pageX - canvas.offsetLeft;
                 var y = e.pageY - canvas.offsetTop;
 
@@ -153,23 +173,49 @@ var f = function ($compile) {
                         if (clickedNode.node.selected != 1) {
                             clickedNode.node.selected = clickedNode.node.selected == 0 ? 2 : 0;
                             nodeLocations[i] = clickedNode;
+
+                            switch (clickedNode.node.selected) {
+                                case 0: 
+                                    var indexof = scope.selectedfucks.indexOf(clickedNode.node);
+                                    scope.selectedfucks.splice(indexof, 1); 
+                                    break;
+                                case 2: scope.selectedfucks.push(clickedNode.node);
+                                    break;
+                            }
+                            scope.$apply();
                         }
                     }
                 }
 
-                if (clickedNode == null || clickedNode.node.selected == 1)
-                    return; else 
-                    reDraw(clickedNode);
+                if (clickedNode == null || clickedNode.node.selected == 1) {
+                    scope.onDisallowedSelected({ $node: clickedNode.node });
+                    return;
+                }
+                else {
+                    switch (clickedNode.node.selected) {
+                        case 0: scope.onDeselected({ $node: clickedNode.node });
+                            break;
+                        case 2: scope.onSelected({ $node: clickedNode.node });
+                            break;
+                    }
+
+                    drawSquare(
+                        clickedNode.node.selected,
+                        clickedNode.x,
+                        clickedNode.y,
+                        clickedNode.width,
+                        clickedNode.height,
+                        clickedNode.node.displayName
+                        );
+                }
             };
 
             var addClickEventToCanvas = function () {
+                var canvas = element.find('canvas')[0];
                 canvas.addEventListener('click', onCanvasClick, false);
             };
         }
     }
 };
 
-angular.module('keruc', []).directive('keruc', ['$compile', f]);
-
-
-
+angular.module('keruC', []).directive('kerucSeatpicker', ['$compile', f]);

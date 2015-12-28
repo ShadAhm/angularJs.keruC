@@ -175,7 +175,10 @@ var f = function ($compile) {
                             nodeLocations[i] = clickedNode;
 
                             switch (clickedNode.node.selected) {
-                                case 0: scope.selectedfucks.pop(clickedNode.node);
+                                case 0: 
+                                    scope.selectedfucks.pop(clickedNode.node);
+                                    var indexof = scope.selectedfucks.indexOf(clickedNode.node);
+                                    scope.selectedfucks.splice(indexof, 1); 
                                     break;
                                 case 2: scope.selectedfucks.push(clickedNode.node);
                                     break;

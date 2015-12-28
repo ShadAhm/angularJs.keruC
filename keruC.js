@@ -176,7 +176,6 @@ var f = function ($compile) {
 
                             switch (clickedNode.node.selected) {
                                 case 0: 
-                                    scope.selectedfucks.pop(clickedNode.node);
                                     var indexof = scope.selectedfucks.indexOf(clickedNode.node);
                                     scope.selectedfucks.splice(indexof, 1); 
                                     break;
@@ -207,7 +206,7 @@ var f = function ($compile) {
                         clickedNode.width,
                         clickedNode.height,
                         clickedNode.node.displayName
-                        )
+                        );
                 }
             };
 

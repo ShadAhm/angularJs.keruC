@@ -188,14 +188,14 @@ var f = function ($compile) {
                 }
 
                 if (clickedNode == null || clickedNode.node.selected == 1) {
-                    scope.onDisallowedSelected({ $node: clickedNode.node });
+                    scope.onDisallowedSelected({ "$node": clickedNode.node });
                     return;
                 }
                 else {
                     switch (clickedNode.node.selected) {
-                        case 0: scope.onDeselected({ $node: clickedNode.node });
+                        case 0: scope.onDeselected({ "$node": clickedNode.node });
                             break;
-                        case 2: scope.onSelected({ $node: clickedNode.node });
+                        case 2: scope.onSelected({ "$node": clickedNode.node });
                             break;
                     }
 

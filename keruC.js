@@ -18,12 +18,12 @@ var f = function ($compile) {
             scope.settings = {
                 canvasWidth: attrs.canvasWidth || 500,
                 canvasHeight: attrs.canvasHeight || 500,
-                freeSeatColour: attrs.freeSeatColour || '#76D75D',
-                freeSeatTextColour: attrs.freeSeatTextColour || '#C1F2B4',
-                takenSeatColour: attrs.takenSeatColour || '#F56979',
-                takenSeatTextColour: attrs.takenSeatTextColour || '#BB1F31',
-                selectedSeatColour: attrs.selectedSeatColour || '#7854AF',
-                selectedSeatTextColour: attrs.selectedSeatTextColour || '#472085'
+                vacantColourBg: attrs.vacantColourBg || '#76D75D',
+                vacantColourFg: attrs.vacantColourFg || '#C1F2B4',
+                occupiedColourBg: attrs.occupiedColourBg || '#F56979',
+                occupiedColourFg: attrs.occupiedColourFg || '#BB1F31',
+                selectedColourBg: attrs.selectedColourBg || '#7854AF',
+                selectedColourFg: attrs.selectedColourFg || '#472085'
             };
 
             var structure =
@@ -77,16 +77,16 @@ var f = function ($compile) {
 
                 switch (selected) {
                     case 0:
-                        seatColour = scope.settings.freeSeatColour;
-                        textColour = scope.settings.freeSeatTextColour;
+                        seatColour = scope.settings.vacantColourBg;
+                        textColour = scope.settings.vacantColourFg;
                         break;
                     case 1:
-                        seatColour = scope.settings.takenSeatColour;
-                        textColour = scope.settings.takenSeatTextColour;
+                        seatColour = scope.settings.occupiedColourBg;
+                        textColour = scope.settings.occupiedColourFg;
                         break;
                     case 2:
-                        seatColour = scope.settings.selectedSeatColour;
-                        textColour = scope.settings.selectedSeatTextColour;
+                        seatColour = scope.settings.selectedColourBg;
+                        textColour = scope.settings.selectedColourFg;
 
                         ctx.fillStyle = seatColour;
                         ctx.fillRect(xPos, yPos, width, height);

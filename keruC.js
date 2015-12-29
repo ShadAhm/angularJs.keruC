@@ -6,7 +6,7 @@ var f = function ($compile) {
         template: '<canvas width="{{settings.canvasWidth}}" height="{{settings.canvasHeight}}" id="canvasId"></canvas>',
         scope: {
             rows: '=data',
-            selectedfucks: '=',
+            selectedNodes: '=',
             onSelected: '&',
             onDeselected: '&',
             onDisallowedSelected: '&'
@@ -176,10 +176,10 @@ var f = function ($compile) {
 
                             switch (clickedNode.node.selected) {
                                 case 0: 
-                                    var indexof = scope.selectedfucks.indexOf(clickedNode.node);
-                                    scope.selectedfucks.splice(indexof, 1); 
+                                    var indexof = scope.selectedNodes.indexOf(clickedNode.node);
+                                    scope.selectedNodes.splice(indexof, 1); 
                                     break;
-                                case 2: scope.selectedfucks.push(clickedNode.node);
+                                case 2: scope.selectedNodes.push(clickedNode.node);
                                     break;
                             }
                             scope.$apply();
@@ -188,14 +188,14 @@ var f = function ($compile) {
                 }
 
                 if (clickedNode == null || clickedNode.node.selected == 1) {
-                    scope.onDisallowedSelected({ $node: clickedNode.node });
+                    scope.onDisallowedSelected({ "$node": clickedNode.node });
                     return;
                 }
                 else {
                     switch (clickedNode.node.selected) {
-                        case 0: scope.onDeselected({ $node: clickedNode.node });
+                        case 0: scope.onDeselected({ "$node": clickedNode.node });
                             break;
-                        case 2: scope.onSelected({ $node: clickedNode.node });
+                        case 2: scope.onSelected({ "$node": clickedNode.node });
                             break;
                     }
 

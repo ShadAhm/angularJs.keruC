@@ -37,10 +37,15 @@ class Row {
 }
 
 class Node {
-	type : string;
+	type : NodeType;
     uniqueName : string; // this must be unique
     displayName : string; // this property will be what's displayed on the seats of your seat map
     selected : NodeState; 
+}
+
+enum NodeType {
+    Void, // will be rendered as a blank 'square', i.e for aisles
+    Seat 
 }
 
 enum NodeState {
@@ -69,6 +74,7 @@ You can customize your seat picker by specifying these following attributes:
 
 ## Attach your callbacks
 It is also possible to call a function in your controller scope when:
+
 1. User selects a node (a seat)
 2. User deselects a node
 3. User attempting to click on a disallowed node (occupied seat)

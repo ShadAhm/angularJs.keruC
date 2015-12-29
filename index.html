@@ -71,10 +71,10 @@
                 <keruc-seatpicker data-data="seatsData" data-selectedfucks="selloutfuckhead" data-on-selected="fuckheadSelected($node)"
                 data-on-deselected="fuckheadDeselected($node)" data-on-disallowed-selected="fuckheadDisallowedSelected($node)"></keruc-seatpicker>
                 <div>
-                    <h6 class="list-heading">Event listeners:</h6>
+                    <h6 class="list-heading">Events <small>run your own callbacks</small></h6>
                     <div ng-bind="userEvent">
                     </div>
-                        <h6 class="list-heading">Selected seats: <smawl>(accessible in parent controller scope)<smawl></h6>
+                        <h6 class="list-heading">Selected seats <small>accessible in parent controller scope<small></h6>
                     <div>
                         <span ng-show="selloutfuckhead.length > 0" ng-repeat-start="fuckhead in selloutfuckhead track by fuckhead.uniqueName" ng-bind="fuckhead.displayName"></span>
                         <span ng-repeat-end>{{$last ? '' : ', '}}</span>

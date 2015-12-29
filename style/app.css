@@ -32,11 +32,6 @@ div.flex-container > div.flex-columns {
     font-size:small; 
 }
 
-.listheading > smawl {
-    font-size:smaller;
-    font-style: italic; 
-}
-
 div.flex-column-left {
     max-width:288px;
     flex-grow:unset;

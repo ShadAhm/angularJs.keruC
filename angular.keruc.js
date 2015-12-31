@@ -1,3 +1,11 @@
+/*
+angular.keruc.js version0.1.5
+Copyright (c) 2015 Arshad Ahmad
+License: The MIT License (MIT)
+
+https://shadahm.github.com/angular.keruC
+*/
+
 "use strict";
 
 var f = function ($compile) {

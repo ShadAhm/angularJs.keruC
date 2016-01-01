@@ -226,4 +226,4 @@ var f = function ($compile) {
     }
 };
 
-angular.module('keruC', []).directive('kerucSeatpicker', ['$compile', f]);
+angular.module('keruC', []).directive('kerucSeatmap', ['$compile', f]);

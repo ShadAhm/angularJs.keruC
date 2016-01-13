@@ -50,3 +50,14 @@ div.selectedbox {
     color: #472085;
     background-color: #7854AF; 
 }
+
+table#tblBrowsers td {
+    padding:0.5em; 
+    border:2px dotted rgb(245,245,245);
+}
+
+td.browser-logo-cell {
+    color:darkslategrey;
+    background-color:rgb(245,245,245);
+    
+}

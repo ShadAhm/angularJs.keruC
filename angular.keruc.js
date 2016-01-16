@@ -24,7 +24,7 @@ var f = function ($compile) {
                 occupiedColourFg: attrs.occupiedColourFg || '#BB1F31',
                 selectedColourBg: attrs.selectedColourBg || '#7854AF',
                 selectedColourFg: attrs.selectedColourFg || '#472085',
-                showRowLabel: attrs.showRowLabel || true,
+                showRowLabel: attrs.showRowLabel || false,
                 showSeatLabel: attrs.showSeatLabel || true
             };
 
@@ -49,6 +49,9 @@ var f = function ($compile) {
                     if (rows[i].nodes.length >= longestRow)
                         longestRow = rows[i].nodes.length;
                 }
+                
+                if(scope.settings.showRowLabel)
+                    ++longestRow; 
 
                 var numberOfCabangX = longestRow + 1;
                 var numberOfCabangY = rows.length + 1;
@@ -110,15 +113,33 @@ var f = function ($compile) {
 
                 ctx.fillStyle = seatColour;
                 ctx.fillRect(xPos, yPos, width, height);
-                ctx.fillStyle = textColour;
                 
                 if(scope.settings.showSeatLabel == true )
                 {
+                    ctx.fillStyle = textColour;
                     ctx.textBaseline = 'middle';
                     ctx.textAlign = 'center';
                     ctx.font = fontSize + 'px sans-serif';
                     ctx.fillText(displayName, boxCentrePointX, boxCentrePointY);
                 }
+            };
+            
+            var drawRowLabel = function(row, xPos, yPos) {
+                var canvas = element.find('canvas')[0];
+                var ctx = canvas.getContext('2d');
+                var fontSize = structure.eachSquare.width * 0.35;
+                var textColour = '#999999';
+                
+                var boxCentrePointX = xPos + (structure.eachSquare.width / 2);
+                var boxCentrePointY = yPos + (structure.eachSquare.height / 2);
+                
+                ctx.fillStyle = textColour;
+                ctx.textBaseline = 'middle';
+                ctx.textAlign = 'center';
+                ctx.font = fontSize + 'px sans-serif';
+                ctx.fillText(row.rowName, boxCentrePointX, boxCentrePointY);
+                
+                return xPos + structure.eachCabangX + structure.eachSquare.width; 
             };
 
             var draw = function () {
@@ -128,6 +149,11 @@ var f = function ($compile) {
                 var lastUp = 0;
                 for (var i = 0; i < rows.length; ++i) {
                     var lastRight = 0;
+                    
+                    if(scope.settings.showRowLabel == true)
+                    {
+                        lastRight = drawRowLabel(rows[i], lastRight + structure.eachCabangX, lastUp + structure.eachCabangY); 
+                    }
 
                     for (var j = 0; j < rows[i].nodes.length; ++j) {
                         if (rows[i].nodes[j].type == 0) {

@@ -23,7 +23,9 @@ var f = function ($compile) {
                 occupiedColourBg: attrs.occupiedColourBg || '#F56979',
                 occupiedColourFg: attrs.occupiedColourFg || '#BB1F31',
                 selectedColourBg: attrs.selectedColourBg || '#7854AF',
-                selectedColourFg: attrs.selectedColourFg || '#472085'
+                selectedColourFg: attrs.selectedColourFg || '#472085',
+                showRowLabel: attrs.showRowLabel || true,
+                showSeatLabel: attrs.showSeatLabel || true
             };
 
             var structure =
@@ -96,7 +98,7 @@ var f = function ($compile) {
                         ctx.arc(boxCentrePointX, boxCentrePointY, structure.eachSquare.width * 0.2, 0, 2 * Math.PI);
                         ctx.closePath();
                         ctx.fill();
-
+                        
                         ctx.beginPath();
                         ctx.fillStyle = '#472085';
                         ctx.beginPath();
@@ -109,10 +111,14 @@ var f = function ($compile) {
                 ctx.fillStyle = seatColour;
                 ctx.fillRect(xPos, yPos, width, height);
                 ctx.fillStyle = textColour;
-                ctx.textBaseline = 'middle';
-                ctx.textAlign = 'center';
-                ctx.font = fontSize + 'px sans-serif';
-                ctx.fillText(displayName, boxCentrePointX, boxCentrePointY);
+                
+                if(scope.settings.showSeatLabel == true )
+                {
+                    ctx.textBaseline = 'middle';
+                    ctx.textAlign = 'center';
+                    ctx.font = fontSize + 'px sans-serif';
+                    ctx.fillText(displayName, boxCentrePointX, boxCentrePointY);
+                }
             };
 
             var draw = function () {

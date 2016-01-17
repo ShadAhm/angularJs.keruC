@@ -51,7 +51,7 @@ var f = function ($compile) {
                 }
                 
                 if(scope.settings.showRowLabel)
-                    ++longestRow; 
+                    longestRow = longestRow + 2; 
 
                 var numberOfCabangX = longestRow + 1;
                 var numberOfCabangY = rows.length + 1;
@@ -179,6 +179,11 @@ var f = function ($compile) {
 
                             lastRight = lastRight + structure.eachCabangX + structure.eachSquare.width;
                         }
+                    }
+                    
+                    if(scope.settings.showRowLabel == true)
+                    {
+                        lastRight = drawRowLabel(rows[i], lastRight + structure.eachCabangX, lastUp + structure.eachCabangY); 
                     }
 
                     lastUp = lastUp + structure.eachCabangY + structure.eachSquare.height;

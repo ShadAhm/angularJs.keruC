@@ -30,8 +30,8 @@ var f = function ($compile) {
 
             var structure =
                 {
-                    eachCabangX: 0,
-                    eachCabangY: 0,
+                    squareGapX: 0, // gaps between squares, 3 squares will have 2 gaps between them
+                    squareGapY: 0,
                     eachSquare: { width: 0, height: 0 }
                 }
 
@@ -49,20 +49,20 @@ var f = function ($compile) {
                     if (rows[i].nodes.length >= longestRow)
                         longestRow = rows[i].nodes.length;
                 }
-                
-                if(scope.settings.showRowLabel)
-                    longestRow = longestRow + 2; 
 
-                var numberOfCabangX = longestRow + 1;
-                var numberOfCabangY = rows.length + 1;
+                if (scope.settings.showRowLabel)
+                    longestRow = longestRow + 2;
 
-                var totalCabangSpaceX = canvasWidth * 0.1;
-                var totalCabangSpaceY = canvasHeight * 0.1;
+                var numberOfSquareGapsX = longestRow + 1;
+                var numberOfSquareGapsY = rows.length + 1;
 
-                structure.eachCabangX = totalCabangSpaceX / numberOfCabangX;
-                structure.eachCabangY = totalCabangSpaceY / numberOfCabangY;
-                structure.eachSquare.width = (canvasWidth - totalCabangSpaceX) / longestRow;
-                structure.eachSquare.height = (canvasHeight - totalCabangSpaceY) / rows.length;
+                var totalSquareGapSpaceX = canvasWidth * 0.1;
+                var totalSquareGapSpaceY = canvasHeight * 0.1;
+
+                structure.squareGapX = totalSquareGapSpaceX / numberOfSquareGapsX;
+                structure.squareGapY = totalSquareGapSpaceY / numberOfSquareGapsY;
+                structure.eachSquare.width = (canvasWidth - totalSquareGapSpaceX) / longestRow;
+                structure.eachSquare.height = (canvasHeight - totalSquareGapSpaceY) / rows.length;
 
                 draw();
                 addClickEventToCanvas();
@@ -76,7 +76,7 @@ var f = function ($compile) {
                 var fontSize = structure.eachSquare.width * 0.4;
                 var seatColour = '#000000';
                 var textColour = '#000000';
-                
+
                 var boxCentrePointX = xPos + (structure.eachSquare.width / 2);
                 var boxCentrePointY = yPos + (structure.eachSquare.height / 2);
 
@@ -101,7 +101,7 @@ var f = function ($compile) {
                         ctx.arc(boxCentrePointX, boxCentrePointY, structure.eachSquare.width * 0.2, 0, 2 * Math.PI);
                         ctx.closePath();
                         ctx.fill();
-                        
+
                         ctx.beginPath();
                         ctx.fillStyle = '#472085';
                         ctx.beginPath();
@@ -113,9 +113,8 @@ var f = function ($compile) {
 
                 ctx.fillStyle = seatColour;
                 ctx.fillRect(xPos, yPos, width, height);
-                
-                if(scope.settings.showSeatLabel == true )
-                {
+
+                if (scope.settings.showSeatLabel == true) {
                     ctx.fillStyle = textColour;
                     ctx.textBaseline = 'middle';
                     ctx.textAlign = 'center';
@@ -123,23 +122,23 @@ var f = function ($compile) {
                     ctx.fillText(displayName, boxCentrePointX, boxCentrePointY);
                 }
             };
-            
-            var drawRowLabel = function(row, xPos, yPos) {
+
+            var drawRowLabel = function (row, xPos, yPos) {
                 var canvas = element.find('canvas')[0];
                 var ctx = canvas.getContext('2d');
                 var fontSize = structure.eachSquare.width * 0.35;
                 var textColour = '#999999';
-                
+
                 var boxCentrePointX = xPos + (structure.eachSquare.width / 2);
                 var boxCentrePointY = yPos + (structure.eachSquare.height / 2);
-                
+
                 ctx.fillStyle = textColour;
                 ctx.textBaseline = 'middle';
                 ctx.textAlign = 'center';
                 ctx.font = fontSize + 'px sans-serif';
                 ctx.fillText(row.rowName, boxCentrePointX, boxCentrePointY);
-                
-                return xPos + structure.eachCabangX + structure.eachSquare.width; 
+
+                return xPos + structure.squareGapX + structure.eachSquare.width;
             };
 
             var draw = function () {
@@ -149,44 +148,42 @@ var f = function ($compile) {
                 var lastUp = 0;
                 for (var i = 0; i < rows.length; ++i) {
                     var lastRight = 0;
-                    
-                    if(scope.settings.showRowLabel == true)
-                    {
-                        lastRight = drawRowLabel(rows[i], lastRight + structure.eachCabangX, lastUp + structure.eachCabangY); 
+
+                    if (scope.settings.showRowLabel == true) {
+                        lastRight = drawRowLabel(rows[i], lastRight + structure.squareGapX, lastUp + structure.squareGapY);
                     }
 
                     for (var j = 0; j < rows[i].nodes.length; ++j) {
                         if (rows[i].nodes[j].type == 0) {
-                            lastRight = lastRight + structure.eachCabangX + structure.eachSquare.width;
+                            lastRight = lastRight + structure.squareGapX + structure.eachSquare.width;
                         }
                         else {
                             drawSquare(
                                 rows[i].nodes[j].selected,
-                                lastRight + structure.eachCabangX,
-                                lastUp + structure.eachCabangY,
+                                lastRight + structure.squareGapX,
+                                lastUp + structure.squareGapY,
                                 structure.eachSquare.width,
                                 structure.eachSquare.height,
                                 rows[i].nodes[j].displayName
-                                );
+                            );
 
                             nodeLocations.push({
                                 node: rows[i].nodes[j],
-                                x: lastRight + structure.eachCabangX,
-                                y: lastUp + structure.eachCabangY,
+                                x: lastRight + structure.squareGapX,
+                                y: lastUp + structure.squareGapY,
                                 width: structure.eachSquare.width,
                                 height: structure.eachSquare.height
                             });
 
-                            lastRight = lastRight + structure.eachCabangX + structure.eachSquare.width;
+                            lastRight = lastRight + structure.squareGapX + structure.eachSquare.width;
                         }
                     }
-                    
-                    if(scope.settings.showRowLabel == true)
-                    {
-                        lastRight = drawRowLabel(rows[i], lastRight + structure.eachCabangX, lastUp + structure.eachCabangY); 
+
+                    if (scope.settings.showRowLabel == true) {
+                        lastRight = drawRowLabel(rows[i], lastRight + structure.squareGapX, lastUp + structure.squareGapY);
                     }
 
-                    lastUp = lastUp + structure.eachCabangY + structure.eachSquare.height;
+                    lastUp = lastUp + structure.squareGapY + structure.eachSquare.height;
                 }
             };
 
@@ -212,9 +209,9 @@ var f = function ($compile) {
                             nodeLocations[i] = clickedNode;
 
                             switch (clickedNode.node.selected) {
-                                case 0: 
+                                case 0:
                                     var indexof = scope.selectedNodes.indexOf(clickedNode.node);
-                                    scope.selectedNodes.splice(indexof, 1); 
+                                    scope.selectedNodes.splice(indexof, 1);
                                     break;
                                 case 2: scope.selectedNodes.push(clickedNode.node);
                                     break;
@@ -243,7 +240,7 @@ var f = function ($compile) {
                         clickedNode.width,
                         clickedNode.height,
                         clickedNode.node.displayName
-                        );
+                    );
                 }
             };
 

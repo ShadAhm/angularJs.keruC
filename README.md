@@ -1,5 +1,5 @@
 # angular.keruC
-Seat map picker using AngularJs and HTML5 Canvas
+Seat map picker using AngularJs 1.x and HTML5 Canvas
 
 Demo: https://shadahm.github.io/angular.keruC
 

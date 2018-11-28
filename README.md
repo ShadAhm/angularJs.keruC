@@ -8,7 +8,7 @@ Demo: https://shadahm.github.io/angularJs.keruC
 
 Include keruC in your HTML file (reference after Angular):
 ```html
-<script type="text/javascript" src="/angular.keruc.js"></script>
+<script type="text/javascript" src="/angularjs.keruc.js"></script>
 ```
 
 In your controller, you will need a data for your seatmap:

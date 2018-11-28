@@ -1,14 +1,14 @@
-# angular.keruC
-Seat map picker using AngularJs and HTML5 Canvas
+# angularJs.keruC
+Seat map picker using AngularJs 1.x and HTML5 Canvas.
 
-Demo: https://shadahm.github.io/angular.keruC
+Demo: https://shadahm.github.io/angularJs.keruC
 
 # How to use
 **Note**: Current version of keruC is stil work-in-progress. Use at your own risk.  
 
 Include keruC in your HTML file (reference after Angular):
 ```html
-<script type="text/javascript" src="/angular.keruc.js"></script>
+<script type="text/javascript" src="/angularjs.keruc.js"></script>
 ```
 
 In your controller, you will need a data for your seatmap:
@@ -28,16 +28,16 @@ Put this element where you'd like your seat map to be:
 `$scope.seatsData` in the above example, needs to abide to a specific data structure: (here visualized in TypeScript)
 ```typescript
 class SeatsData {
-	rows : Row[];
+    rows : Row[];
 }
 
 class Row {
-	rowname : string; 
+    rowname : string; 
     nodes : Node[];
 }
 
 class Node {
-	type : NodeType;
+    type : NodeType;
     uniqueName : string; // this must be unique
     displayName : string; // this property will be what's displayed on the seats of your seat map
     selected : NodeState; 
@@ -49,7 +49,7 @@ enum NodeType {
 }
 
 enum NodeState {
-	Vacant,
+    Vacant,
     Occupied,
     Selected
 }
@@ -59,9 +59,9 @@ enum NodeState {
 You can customize your seat picker by specifying these following attributes:
 ```html
 <keruc-seatpicker
-	data-data="seatsData"
+    data-data="seatsData"
     data-canvas-width="500"
-	data-canvas-height="500"
+    data-canvas-height="500"
     data-vacant-colour-bg="#76D75D"
     data-vacant-colour-fg="#C1F2B4"
     data-occupied-colour-bg="#F56979"
@@ -82,7 +82,7 @@ It is also possible to call a function in your controller scope when:
 To attach your callback, simply specify them in the following attributes:
 ```html
 <keruc-seatpicker
-	data-data="seatsData"
+    data-data="seatsData"
     data-on-selected="onSeatSelected($node)"
     data-on-deselected="onSeatDeselected($node)"
     data-on-disallowed-selected="onDisallowedSelected($node)"
@@ -94,3 +94,10 @@ $scope.onSeatSelected = function(node) {
 	console.log('user selected ', node.displayName); 
 }
 ```
+
+## Old name
+This repo used to be named angular.keruC but renamed to angularJs.keruC on November 2018.
+
+The name change is to reflect on that (now), the word "Angular" is commonly used to refer to Angular2 and higher. Which we are not yet supporting. 
+
+If you have with you a file named angular.keruc.js, it is equivalent to angularJs.keruc-0.2.0.js

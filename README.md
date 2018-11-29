@@ -91,7 +91,7 @@ To attach your callback, simply specify them in the following attributes:
 The `$node` will be injected into your callback function where you can access them like so:
 ```javascript
 $scope.onSeatSelected = function(node) {
-	console.log('user selected ', node.displayName); 
+    console.log('user selected ', node.displayName); 
 }
 ```
 

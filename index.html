@@ -5,13 +5,11 @@
 <head lang="ko">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
-
-
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="style/app.css" rel="stylesheet" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular.min.js"></script>
-    <script src="angularjs.keruc-0.2.0.js"></script>
+    <script src="angularjs.keruc-0.2.1.js"></script>
     <script src="scripts/app.js"></script>
 
     <title>angularJs.keruC demo</title>
@@ -21,13 +19,16 @@
     <div class="flex-container">
         <div class="flex-columns flex-column-left">
             <div class="sidebar-container">
-                <h1>angularJs.keruC <small>v0.2.0</small></h1>
-                <small>by 
+                <h1>angularJs.keruC <small>v0.2.1</small></h1>
+                <small>by
                     <a href="https://github.com/shadahm">Arshad Ahmad</a>
                 </small>
 
                 <div class="intro-text">
-                    <p>The C stands for Canvas; keruC is a seatmap/seat-picker implementated with AngularJs and HTML5 Canvas.</p>
+                    <p>The C stands for Canvas; 
+                        keruC is a seatmap/seat-picker implementated 
+                        with AngularJs and HTML5
+                        Canvas.</p>
                 </div>
 
                 <h3 class="list-heading">Dependencies</h3>
@@ -41,7 +42,7 @@
                         <td class="browser-logo-cell"><i class="fa fa-internet-explorer fa-lg"></i></td>
                         <td>9+</td>
                         <td class="browser-logo-cell"><i class="fa fa-edge fa-lg"></i>
-                            <td>12+</td>
+                        <td>12+</td>
                     </tr>
                     <tr>
                         <td class="browser-logo-cell"><i class="fa fa-firefox fa-lg"></i></td>
@@ -57,26 +58,61 @@
                     </tr>
                 </table>
 
-                <hr/>
+                <hr />
 
                 <form action="https://github.com/ShadAhm/angularJs.keruC">
                     <button class="btn btn-link">
                         <i class="fa fa-github"></i> Fork on Github
                     </button>
                 </form>
+
+                <hr />
+                <button data-ng-click="expandSettings()" data-ng-if="false">
+                    <!-- feature not ready yet. -->
+                    <i class="fa fa-gear fa-lg"></i>
+                </button>
+
+                <form class="settings" data-ng-show="isExpandSettings">
+                    <div>
+                        <label>Vacant Color Bg:</label><input type="text" data-ng-model="settings.vacantColourBg" />
+                    </div>
+                    <div>
+                        <label>Vacant Color Fg:</label><input type="text" data-ng-model="settings.vacantColourFg" />
+                    </div>
+                    <div>
+                        <label>Occupied Bg:</label><input type="text" data-ng-model="settings.occupiedColourBg" />
+                    </div>
+                    <div>
+                        <label>Occupied Fg:</label><input type="text" data-ng-model="settings.occupiedColourFg" />
+                    </div>
+                    <div>
+                        <label>Selected Bg:</label><input type="text" data-ng-model="settings.selectedColourBg" />
+                    </div>
+                    <div>
+                        <label>Selected Fg:</label><input type="text" data-ng-model="settings.selectedColourFg" />
+                    </div>
+                    <div>
+                        <label>Show Row Label:</label><input type="checkbox" data-ng-model="settings.showRowLabel" />
+                        <label>Show Seat Label:</label><input type="checkbox" data-ng-model="settings.showSeatLabel" />
+                    </div>
+                </form>
             </div>
         </div>
         <div class="flex-columns flex-column-right">
             <div>
                 <keruc-seatpicker data-data="seatsData" data-selected-nodes="selectedNodes" data-on-selected="nodeSelected($node)"
-                data-on-deselected="nodeDeselected($node)" data-on-disallowed-selected="nodeDisallowedSelected($node)"></keruc-seatpicker>
+                    data-on-deselected="nodeDeselected($node)" data-on-disallowed-selected="nodeDisallowedSelected($node)"
+                    data-vacant-colour-bg="{{settings.vacantColourBg}}" data-vacant-colour-fg="{{settings.vacantColourFg}}"
+                    data-occupied-colour-bg="{{settings.occupiedColourBg}}" data-occupied-colour-fg="{{settings.occupiedColourFg}}"
+                    data-selected-colour-bg="{{settings.selectedColourBg}}" data-selected-colour-fg="{{settings.selectedColourFg}}"></keruc-seatpicker>
                 <div>
                     <h6 class="list-heading">Events <small>run your own callbacks</small></h6>
                     <div ng-bind="userEvent">
                     </div>
-                        <h6 class="list-heading">Selected seats <small>accessible in parent controller scope</small></h6>
+                    <h6 class="list-heading">Selected seats <small>accessible in parent controller scope</small></h6>
                     <div>
-                        <span ng-show="selectedNodes.length > 0" ng-repeat-start="node in selectedNodes track by node.uniqueName" ng-bind="node.displayName"></span>
+                        <span ng-show="selectedNodes.length > 0" ng-repeat-start="node in selectedNodes track by node.uniqueName"
+                            ng-bind="node.displayName"></span>
                         <span ng-repeat-end>{{$last ? '' : ', '}}</span>
                         <span ng-show="selectedNodes.length <= 0">none</span>
                     </div>

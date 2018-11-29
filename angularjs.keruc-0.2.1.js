@@ -15,25 +15,28 @@ var f = function ($compile) {
             var nodeLocations = [];
             var rows = null;
 
-            scope.settings = {
-                canvasWidth: attrs.canvasWidth || 500,
-                canvasHeight: attrs.canvasHeight || 500,
-                vacantColourBg: attrs.vacantColourBg || '#76D75D',
-                vacantColourFg: attrs.vacantColourFg || '#C1F2B4',
-                occupiedColourBg: attrs.occupiedColourBg || '#F56979',
-                occupiedColourFg: attrs.occupiedColourFg || '#BB1F31',
-                selectedColourBg: attrs.selectedColourBg || '#7854AF',
-                selectedColourFg: attrs.selectedColourFg || '#472085',
-                showRowLabel: attrs.showRowLabel || false,
-                showSeatLabel: attrs.showSeatLabel || true
-            };
+            function initialiseSettings() {
+                scope.settings = {
+                    canvasWidth: attrs.canvasWidth || 500,
+                    canvasHeight: attrs.canvasHeight || 500,
+                    vacantColourBg: attrs.vacantColourBg || '#76D75D',
+                    vacantColourFg: attrs.vacantColourFg || '#C1F2B4',
+                    occupiedColourBg: attrs.occupiedColourBg || '#F56979',
+                    occupiedColourFg: attrs.occupiedColourFg || '#BB1F31',
+                    selectedColourBg: attrs.selectedColourBg || '#7854AF',
+                    selectedColourFg: attrs.selectedColourFg || '#472085',
+                    showRowLabel: attrs.showRowLabel || false,
+                    showSeatLabel: attrs.showSeatLabel || true
+                };
+            }
+            initialiseSettings();
 
             var structure =
-                {
-                    squareGapX: 0, // gaps between squares, 3 squares will have 2 gaps between them
-                    squareGapY: 0,
-                    eachSquare: { width: 0, height: 0 }
-                }
+            {
+                squareGapX: 0, // gaps between squares, 3 squares will have 2 gaps between them
+                squareGapY: 0,
+                eachSquare: { width: 0, height: 0 }
+            };
 
             var onRowDataChanged = function (newData) {
                 if (newData == null)

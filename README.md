@@ -21,7 +21,7 @@ angular.module('yourApp')
 Put this element where you'd like your seat map to be:
 ```html
 <div ng-controller="yourController">
-	<keruc-seatpicker data-data="seatsData"></keruc-seatpicker>
+    <keruc-seatpicker data-data="seatsData"></keruc-seatpicker>
 </div>
 ```
 ## Data structure

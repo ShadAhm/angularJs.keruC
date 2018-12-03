@@ -14,14 +14,14 @@ Include keruC in your HTML file (reference after Angular):
 In your controller, you will need a data for your seatmap:
 ```javascript
 angular.module('yourApp')
-	.controller('yourController', function($scope) {
-		$scope.seatsData = getSeatsData(); 
-	}); 
+    .controller('yourController', function($scope) {
+        $scope.seatsData = getSeatsData(); 
+    }); 
 ```
 Put this element where you'd like your seat map to be:
 ```html
 <div ng-controller="yourController">
-	<keruc-seatpicker data-data="seatsData"></keruc-seatpicker>
+    <keruc-seatpicker data-data="seatsData"></keruc-seatpicker>
 </div>
 ```
 ## Data structure

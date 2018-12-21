@@ -67,8 +67,8 @@ You can customize your seat picker by specifying these following attributes:
     data-occupied-colour-bg="#F56979"
     data-occupied-colour-fg="#BB1F31"
     data-selected-colour-bg="#7854AF"
-    data-selected-colour-fg="#472085"
-></keruc-seatpicker>
+    data-selected-colour-fg="#472085">
+</keruc-seatpicker>
 ```
 **Note**: What you're also seeing here are the default values where these attributes are not specified. 
 

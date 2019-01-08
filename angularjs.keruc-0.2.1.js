@@ -112,6 +112,8 @@ var f = function ($compile) {
                         ctx.closePath();
                         ctx.fill();
                         return;
+                    default:
+                        console.error('Seat state invalid'); 
                 }
 
                 ctx.fillStyle = seatColour;

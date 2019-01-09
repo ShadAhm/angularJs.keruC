@@ -226,7 +226,11 @@ var f = function ($compile) {
                     }
                 }
 
-                if (clickedNode == null || clickedNode.node.selected == 1) {
+                if(clickedNode == null) {
+                    // user clicked on a 'void' node, do nothing
+                    return; 
+                }
+                else if (clickedNode.node.selected == 1) {
                     scope.onDisallowedSelected({ "$node": clickedNode.node });
                     return;
                 }

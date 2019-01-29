@@ -95,9 +95,13 @@ $scope.onSeatSelected = function(node) {
 }
 ```
 
-## Old name
+## Etc
+### Old name
 This repo used to be named angular.keruC but renamed to angularJs.keruC on November 2018.
 
 The name change is to reflect on that (now), the word "Angular" is commonly used to refer to Angular version 2 and higher. Which we are not yet supporting. 
 
 If you have with you a file named angular.keruc.js, it is likely an equivalence of angularJs.keruc-0.2.0.js
+
+### Licensing
+This project is licensed under the MIT license, which can be read [here](https://github.com/ShadAhm/angularJs.keruC/blob/master/LICENSE).

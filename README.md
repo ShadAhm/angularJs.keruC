@@ -6,7 +6,7 @@ Demo: https://shadahm.github.io/angularJs.keruC
 # How to use
 **Note**: Current version of keruC is stil work-in-progress. Use at your own risk.  
 
-Include keruC in your HTML file (reference after Angular):
+Include keruC in your HTML file (reference after AngularJs):
 ```html
 <script type="text/javascript" src="/angularjs.keruc.js"></script>
 ```

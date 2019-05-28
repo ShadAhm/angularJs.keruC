@@ -5,7 +5,8 @@
 <head lang="en">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"
+        type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="style/app.css" rel="stylesheet" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular.min.js"></script>
@@ -25,8 +26,8 @@
                 </small>
 
                 <div class="intro-text">
-                    <p>The C stands for Canvas; 
-                        keruC is a seatmap/seat-picker implementated 
+                    <p>The C stands for Canvas;
+                        keruC is a seatmap/seat-picker implementated
                         with AngularJs and HTML5
                         Canvas.</p>
                 </div>
@@ -59,8 +60,9 @@
                 </table>
 
                 <hr />
-                
-                <p class="small">This project is licensed under the <a href="https://github.com/ShadAhm/angularJs.keruC/blob/master/LICENSE">MIT License</a>.</p>
+
+                <p class="small">This project is licensed under the <a
+                        href="https://github.com/ShadAhm/angularJs.keruC/blob/master/LICENSE">MIT License</a>.</p>
                 <form action="https://github.com/ShadAhm/angularJs.keruC">
                     <button class="btn btn-link">
                         <i class="fa fa-fw fa-github"></i> Github Repository
@@ -101,18 +103,23 @@
         </div>
         <div class="flex-columns flex-column-right">
             <div>
-                <keruc-seatpicker data-data="seatsData" data-selected-nodes="selectedNodes" data-on-selected="nodeSelected($node)"
-                    data-on-deselected="nodeDeselected($node)" data-on-disallowed-selected="nodeDisallowedSelected($node)"
-                    data-vacant-colour-bg="{{settings.vacantColourBg}}" data-vacant-colour-fg="{{settings.vacantColourFg}}"
-                    data-occupied-colour-bg="{{settings.occupiedColourBg}}" data-occupied-colour-fg="{{settings.occupiedColourFg}}"
-                    data-selected-colour-bg="{{settings.selectedColourBg}}" data-selected-colour-fg="{{settings.selectedColourFg}}"></keruc-seatpicker>
+                <keruc-seatpicker data-data="seatsData" data-selected-nodes="selectedNodes"
+                    data-on-selected="nodeSelected($node)" data-on-deselected="nodeDeselected($node)"
+                    data-on-disallowed-selected="nodeDisallowedSelected($node)"
+                    data-vacant-colour-bg="{{settings.vacantColourBg}}"
+                    data-vacant-colour-fg="{{settings.vacantColourFg}}"
+                    data-occupied-colour-bg="{{settings.occupiedColourBg}}"
+                    data-occupied-colour-fg="{{settings.occupiedColourFg}}"
+                    data-selected-colour-bg="{{settings.selectedColourBg}}"
+                    data-selected-colour-fg="{{settings.selectedColourFg}}"></keruc-seatpicker>
                 <div>
                     <h6 class="list-heading">Events <small>run your own callbacks</small></h6>
                     <div ng-bind="userEvent">
                     </div>
                     <h6 class="list-heading">Selected seats <small>accessible in parent controller scope</small></h6>
                     <div>
-                        <span ng-show="selectedNodes.length > 0" ng-repeat-start="node in selectedNodes track by node.uniqueName"
+                        <span ng-show="selectedNodes.length > 0"
+                            ng-repeat-start="node in selectedNodes track by node.uniqueName"
                             ng-bind="node.displayName"></span>
                         <span ng-repeat-end>{{$last ? '' : ', '}}</span>
                         <span ng-show="selectedNodes.length <= 0">none</span>

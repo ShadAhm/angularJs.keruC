@@ -1,6 +1,8 @@
 # angularJs.keruC
 Seat map picker built with AngularJs 1.x and HTML5 Canvas.
 
+> **Deprecated:** This AngularJS library is no longer maintained. Active development has moved to the modern [ngx-kerusi-seatmap](https://github.com/ShadAhm/ngx-kerusi-seatmap) project.
+
 Demo: https://shadahm.github.io/angularJs.keruC
 
 # How to use

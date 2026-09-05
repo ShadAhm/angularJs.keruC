@@ -1,13 +1,12 @@
+
+> **Deprecated:** This AngularJS library is no longer maintained. Active development has moved to the modern [kerusiweb](https://github.com/ShadAhm/kerusiweb) project.
+---
 # angularJs.keruC
 Seat map picker built with AngularJs 1.x and HTML5 Canvas.
-
-> **Deprecated:** This AngularJS library is no longer maintained. Active development has moved to the modern [ngx-kerusi-seatmap](https://github.com/ShadAhm/ngx-kerusi-seatmap) project.
 
 Demo: https://shadahm.github.io/angularJs.keruC
 
 # How to use
-**Note**: Current version of keruC is stil work-in-progress. Use at your own risk.  
-
 Include keruC in your HTML file (reference after AngularJs):
 ```html
 <script type="text/javascript" src="/angularjs.keruc.js"></script>
